@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-v2
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: fastapi
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: fastapi
+        version: v2
+    spec:
+      containers:
+        - name: fastapi
+          image: fastapi-app:v2
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
