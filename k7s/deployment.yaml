@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: fastapi
+  namespace: rbac-demo
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: fastapi
+
+  template:
+    metadata:
+      labels:
+        app: fastapi
+
+    spec:
+      serviceAccountName: fastapi-sa
+
+      containers:
+        - name: fastapi
+          image: fastapi-app:v2
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8000
