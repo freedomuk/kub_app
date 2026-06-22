@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+
+metadata:
+  name: fastapi
+  namespace: prod
+
+spec:
+  serviceName: fastapi
+
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: fastapi
+
+  template:
+    metadata:
+      labels:
+        app: fastapi
+
+    spec:
+      containers:
+        - name: fastapi
+          image: fastapi-app:v2
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8000
